@@ -22,7 +22,7 @@
         duckweb-beak = mkSystem "x86_64-linux" "duckweb-beak" [];
 
         # duckweb-thighs = mkSystem "aarch64-linux" "duckweb-thighs" [
-        #   ./profiles/packages/ptero.nix
+        #   ./profiles/pkgs/ptero.nix
         # ];
       };
     };
