@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./disk-config.nix
     ../../profiles/core.nix
     ../../profiles/pkgs/base.nix
 

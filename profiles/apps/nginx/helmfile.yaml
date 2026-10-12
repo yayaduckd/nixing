@@ -13,4 +13,4 @@ releases:
           ingressClassName: traefik
           hostname: beak.yayaduck.com
         nodeSelector:
-          kubernetes.io/hostname: duckweb-beak
+          kubernetes.io/hostname: duckweb-wings

@@ -7,9 +7,13 @@
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, agenix, ... }@inputs:
+  outputs = { self, nixpkgs, agenix, disko, ... }@inputs:
     let
       inherit (nixpkgs.lib) nixosSystem;
 
@@ -18,6 +22,7 @@
         specialArgs = { inherit inputs; };
         modules = [
           agenix.nixosModules.default
+          disko.nixosModules.disko
           ./hosts/${hostname}/configuration.nix
         ] ++ modules;
       };
