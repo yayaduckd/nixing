@@ -12,7 +12,6 @@
     extraFlags = toString [
       "--disable traefik"
       "--tls-san=beak.yayaduck.com"
-      "--node-external-ip=beak.yayaduck.com"
     ];
   };
 
