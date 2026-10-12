@@ -8,4 +8,5 @@ let
 in
 {
   "k3s-token.age".publicKeys = [ yayad beak feathers ];
+  "immich-db-pass.age".publicKeys = [ yayad beak feathers ];
 }

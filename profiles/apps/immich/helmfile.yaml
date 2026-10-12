@@ -1,0 +1,40 @@
+repositories:
+  - name: immich
+    url: https://immich-app.github.io/immich-charts
+
+releases:
+  - name: immich
+    namespace: immich
+    createNamespace: true
+    chart: immich/immich
+    values:
+      - env:
+          DB_PASSWORD: '{{ readFile (env "DB_PASS_FILE") | trim }}'
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: traefik
+            hosts:
+              - host: immich.yayaduck.com
+                paths:
+                  - path: "/"
+        server:
+          nodeSelector:
+            kubernetes.io/hostname: duckweb-wings
+        microservices:
+          nodeSelector:
+            kubernetes.io/hostname: duckweb-wings
+        machine-learning:
+          nodeSelector:
+            kubernetes.io/hostname: duckweb-wings
+        postgresql:
+          primary:
+            nodeSelector:
+              kubernetes.io/hostname: duckweb-wings
+          auth:
+            password: '{{ readFile (env "DB_PASS_FILE") | trim }}'
+            postgresPassword: '{{ readFile (env "DB_PASS_FILE") | trim }}'
+        redis:
+          master:
+            nodeSelector:
+              kubernetes.io/hostname: duckweb-wings
