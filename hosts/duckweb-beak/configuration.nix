@@ -7,7 +7,6 @@
     ../../profiles/pkgs/base.nix
 
     ../../profiles/k3s/server.nix
-    ../../profiles/apps/immich
   ];
 
   networking.hostName = "duckweb-beak";

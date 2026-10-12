@@ -10,7 +10,7 @@
     role = "server";
     tokenFile = config.age.secrets.k3s-token.path;
     extraFlags = toString [
-      # "--disable traefik"
+      "--disable traefik"
       "--tls-san=beak.yayaduck.com"
     ];
   };
