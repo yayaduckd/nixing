@@ -1,6 +1,8 @@
-{ ... }:
+{ agenix, ... }:
 
 {
+  imports = [ agenix.nixosModules.default ];
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
