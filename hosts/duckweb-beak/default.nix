@@ -24,7 +24,7 @@
       {
         name = "quackietop";
         wgIp = "10.100.0.100";
-        wgPubKey = "QpiEiZLxCVotQyI5BNrXG0MrqzVLiam5y2TYWULAn1w";
+        wgPubKey = "QpiEiZLxCVotQyI5BNrXG0MrqzVLiam5y2TYWULAn1w=";
       }
     ];
   };

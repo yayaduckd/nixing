@@ -1,3 +1,4 @@
+# profiles/apps/forgejo.nix
 { pkgs, config, ... }:
 
 let
@@ -5,6 +6,8 @@ let
   httpPort = 3000;
 in
 {
+  environment.systemPackages = [ config.services.forgejo.package ];
+
   services.forgejo = {
     enable = true;
     package = pkgs.forgejo;
@@ -12,7 +15,7 @@ in
     lfs.enable = true;
 
     settings = {
-      DEFAULT.APP_NAME = "Duckweb Git";
+      DEFAULT.APP_NAME = "Duckit";
       server = {
         DOMAIN = domain;
         ROOT_URL = "https://${domain}/";
