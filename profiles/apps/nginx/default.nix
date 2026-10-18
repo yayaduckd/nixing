@@ -1,29 +1,28 @@
 { pkgs, ... }:
 
 {
-  systemd.services.deploy-nginx = {
-    description = "Deploy NGINX via Helmfile";
-    after = [ "k3s.service" ];
-    wants = [ "k3s.service" ];
-    wantedBy = [ "multi-user.target" ];
+  networking.firewall.interfaces."wg0".allowedTCPPorts = [ 8080 ];
 
-    path = with pkgs; [ kubernetes-helm bash k3s ];
-
-    environment = {
-      KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
-      HELM_CACHE_HOME = "/var/cache/helm";
-      HELM_CONFIG_HOME = "/var/lib/helm/config";
-      HELM_DATA_HOME = "/var/lib/helm/data";
-    };
-
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      StateDirectory = "helm";
-      CacheDirectory = "helm";
-      WorkingDirectory = "/var/lib/helm";
-      ExecStartPre = "${pkgs.bash}/bin/bash -c 'until kubectl get namespace; do sleep 2; done'";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'cp ${./helmfile.yaml} helmfile.yaml && ${pkgs.helmfile}/bin/helmfile -f helmfile.yaml sync'";
+  services.nginx = {
+    enable = true;
+    virtualHosts."_" = {
+      listen = [
+        {
+          addr = "10.100.0.2";
+          port = 8080;
+        }
+      ];
+      root = pkgs.writeTextDir "index.html" "<h1>duckweb-wings</h1>";
     };
   };
+
+  # Reference pattern for OCI workloads on wings:
+  # virtualisation.podman.enable = true;
+  # virtualisation.oci-containers = {
+  #   backend = "podman";
+  #   containers.app = {
+  #     image = "docker.io/library/nginx:stable-alpine";
+  #     ports = [ "10.100.0.2:8081:80" ];
+  #   };
+  # };
 }

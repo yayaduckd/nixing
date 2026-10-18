@@ -7,7 +7,7 @@
     curl
     htop
     jq
-
     neovim
+    wireguard-tools
   ];
 }

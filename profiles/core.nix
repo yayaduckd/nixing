@@ -1,11 +1,24 @@
 { ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+  };
+
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 14d";
+  };
 
   time.timeZone = "UTC";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
+
+  age.identityPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+
+  networking.firewall.enable = true;
 
   users.users = {
     root.hashedPassword = "!";
